@@ -1,0 +1,30 @@
+scales:
+    模型容量
+        deepth:      4\8\16\32
+        channels:    [32, 64, 128]、[64, 128, 256]、[128, 256, 512]
+        cnn:         VGG\ResNet
+    不同数据集
+        dataset:     CIFAR-10\
+    
+    不同组件的作用：
+        activation:  ReLU\Leaky ReLU, PReLU, ELU, Mish
+        Normalization：None、BatchNorm、LayerNorm、GroupNorm
+    不同优化器：
+        Adam/SGD
+    卷积操作的细节：
+        kernel size： 3x3, 5x5, 7x7 in first layer
+        Stride vs Dilation：
+
+    跳跃连接和注意力机制：
+        
+
+Evaluation:
+    //模型容量和过拟合的关系
+    Model capacity and overfitting
+    //不同激活函数如何影响梯度的流动和训练的稳定性。
+    Understand how different activation functions affect the flow of gradients and the stability of training.
+    //归一化的作用
+    Understanding the role of normalization
+    //对比不同卷积核的参数量，训练结果
+    Comparison of the parameter amounts of different convolutional kernels and the training results.
+    //查看跳跃连接的作用

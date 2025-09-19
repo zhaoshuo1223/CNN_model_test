@@ -28,3 +28,8 @@ Evaluation:
     //对比不同卷积核的参数量，训练结果
     Comparison of the parameter amounts of different convolutional kernels and the training results.
     //查看跳跃连接的作用
+
+
+
+
+

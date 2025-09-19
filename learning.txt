@@ -1,2 +1,8 @@
 pytorch
 torchvision
+
+
+
+
+1、padding=1,2,3,5  kernel=3,5,7,11,张量的H，W不变
+

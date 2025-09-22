@@ -2,12 +2,33 @@
 import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
+<<<<<<< Updated upstream
 from model import MyModel
 
 
 
 
 model = MyModel()
+=======
+from torch.utils.tensorboard import SummaryWriter
+from model import AlexNet
+from dataset import Data                                     #Data为张量
+from torch.utils.data import DataLoader
+import os
+
+
+# 创建TensorBoard日志目录
+log_dir = 'runs/AlexNet'
+save_dir = 'save_model/AlexNet'
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+# 初始化TensorBoard writer
+writer = SummaryWriter(log_dir)
+
+model = AlexNet()
+>>>>>>> Stashed changes
 losses = []
 #定义优化器SGD，损失函数MSE
 criterion = nn.MSELoss()

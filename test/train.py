@@ -4,15 +4,15 @@ import torch.nn as nn
 import torchvision
 import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
-from model import MyModel,AlexNet
+from model import VGGNet
 from dataset import Data                                     #Data为张量
 from torch.utils.data import DataLoader
 import os
 
 
 # 创建TensorBoard日志目录
-log_dir = 'runs/AlexNet'
-save_dir = 'save_model/AlexNet'
+log_dir = 'runs/VGGNet'
+save_dir = 'save_model/VGGNet'
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 if not os.path.exists(save_dir):
@@ -20,7 +20,7 @@ if not os.path.exists(save_dir):
 # 初始化TensorBoard writer
 writer = SummaryWriter(log_dir)
 
-model = AlexNet()
+model = VGGNet()
 losses = []
 #定义优化器SGD，损失函数交叉熵
 criterion = nn.CrossEntropyLoss()

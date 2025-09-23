@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
-module_path = r"C:\Users\zhaoshuo\Desktop\cv_test\save_model\AlexNet\module35"
+module_path = r"C:\Users\zhaoshuo\Desktop\cv_test\save_model\VGGNet\module35"
 
 test_loader = DataLoader(TestData,16)
 module = torch.load(module_path,weights_only=False)

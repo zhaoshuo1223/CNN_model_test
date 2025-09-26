@@ -15,10 +15,6 @@ model = VGGNet()
 net = model.backbone
 input = torch.randn(16,3,64,64)
 out = net(input)
-<<<<<<< Updated upstream
-print(out.shape)
-=======
 print(out.shape)
 
 
->>>>>>> Stashed changes

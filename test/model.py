@@ -6,25 +6,12 @@ import torch.nn as nn
 
 
 __all__ = [
-<<<<<<< Updated upstream
-    "MyModel",
-    "AlexNet",
-]
-
-
-
-
-class AlexNet(nn.Module):
-    #定义init
-    def __init__(self, num_classes = 10):
-=======
     "ResNet18"
 ]
 
 #定义残差块：提高net的下限，使其下限从学习复杂特征转变为学习0.
 class ResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):
->>>>>>> Stashed changes
         super().__init__()
         self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1)
         self.bn1 = nn.BatchNorm2d(out_channels)

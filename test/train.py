@@ -4,33 +4,20 @@ import torch.nn as nn
 import torchvision
 import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
-<<<<<<< Updated upstream
-from model import MyModel,AlexNet
-=======
-<<<<<<< Updated upstream
-from model import VGGNet
-=======
 from model import ResNet18
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 from dataset import Data                                     #Data为张量
 from torch.utils.data import DataLoader
 import os
 
+# 设置设备
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"使用设备: {device}")
+
 
 # 创建TensorBoard日志目录
-<<<<<<< Updated upstream
-log_dir = 'runs/AlexNet'
-save_dir = 'save_model/AlexNet'
-=======
-<<<<<<< Updated upstream
-log_dir = 'runs/VGGNet/test3'
-save_dir = 'save_model/VGGNet'
-=======
+
 log_dir = 'runs/ResNet/test'
 save_dir = 'save_model/ResNet18'
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 if not os.path.exists(save_dir):
@@ -38,38 +25,22 @@ if not os.path.exists(save_dir):
 # 初始化TensorBoard writer
 writer = SummaryWriter(log_dir)
 
-<<<<<<< Updated upstream
-model = AlexNet()
-=======
-<<<<<<< Updated upstream
-model = VGGNet()
-model = model.to(device)  # 将模型移动到GPU
 
-# 记录模型结构到TensorBoard (在注册梯度钩子之前)
-dummy_input = torch.randn(1, 3, 64, 64).to(device)
-=======
 model = ResNet18()
 model = model.to(device)  # 将模型移动到GPU
 
 # 记录模型结构到TensorBoard (在注册梯度钩子之前)
 dummy_input = torch.randn(1, 3, 32, 32).to(device)
->>>>>>> Stashed changes
 writer.add_graph(model, dummy_input)
-
 # 现在注册梯度监控钩子
 model._register_gradient_hooks()
 
->>>>>>> Stashed changes
 losses = []
 #定义优化器SGD，损失函数交叉熵
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(),lr=0.01)
 #输入数据处理：转为张量
 train_data = DataLoader(Data,16)
-
-# 记录模型结构到TensorBoard
-dummy_input = torch.randn(1, 3, 32, 32)
-writer.add_graph(model, dummy_input)
 
 print('start:')
 global_step = 0
@@ -81,6 +52,7 @@ for epoch in range(51):
     
     #张量通过模型输出预测值
     for i, (x,y) in enumerate(train_data):
+        x, y = x.to(device), y.to(device)
         y_pre = model(x)
         #计算Loss
         loss = criterion(y_pre,y)
@@ -135,11 +107,11 @@ for epoch in range(51):
 # 记录一些样本图像到TensorBoard
 sample_batch = next(iter(train_data))
 sample_images, sample_labels = sample_batch
-sample_images = sample_images[:8]  # 取前8张图像
-sample_labels = sample_labels[:8]
+sample_images = sample_images[:8].to(device)  # 取前8张图像
+sample_labels = sample_labels[:8].to(device)
 
 # 创建图像网格
-img_grid = torchvision.utils.make_grid(sample_images, normalize=True, scale_each=True)
+img_grid = torchvision.utils.make_grid(sample_images.cpu(), normalize=True, scale_each=True)
 writer.add_image('Sample_Images', img_grid, 0)
 
 # 记录预测结果

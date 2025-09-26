@@ -4,15 +4,33 @@ import torch.nn as nn
 import torchvision
 import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
+<<<<<<< Updated upstream
 from model import MyModel,AlexNet
+=======
+<<<<<<< Updated upstream
+from model import VGGNet
+=======
+from model import ResNet18
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 from dataset import Data                                     #Data为张量
 from torch.utils.data import DataLoader
 import os
 
 
 # 创建TensorBoard日志目录
+<<<<<<< Updated upstream
 log_dir = 'runs/AlexNet'
 save_dir = 'save_model/AlexNet'
+=======
+<<<<<<< Updated upstream
+log_dir = 'runs/VGGNet/test3'
+save_dir = 'save_model/VGGNet'
+=======
+log_dir = 'runs/ResNet/test'
+save_dir = 'save_model/ResNet18'
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 if not os.path.exists(save_dir):
@@ -20,7 +38,28 @@ if not os.path.exists(save_dir):
 # 初始化TensorBoard writer
 writer = SummaryWriter(log_dir)
 
+<<<<<<< Updated upstream
 model = AlexNet()
+=======
+<<<<<<< Updated upstream
+model = VGGNet()
+model = model.to(device)  # 将模型移动到GPU
+
+# 记录模型结构到TensorBoard (在注册梯度钩子之前)
+dummy_input = torch.randn(1, 3, 64, 64).to(device)
+=======
+model = ResNet18()
+model = model.to(device)  # 将模型移动到GPU
+
+# 记录模型结构到TensorBoard (在注册梯度钩子之前)
+dummy_input = torch.randn(1, 3, 32, 32).to(device)
+>>>>>>> Stashed changes
+writer.add_graph(model, dummy_input)
+
+# 现在注册梯度监控钩子
+model._register_gradient_hooks()
+
+>>>>>>> Stashed changes
 losses = []
 #定义优化器SGD，损失函数交叉熵
 criterion = nn.CrossEntropyLoss()
@@ -69,7 +108,11 @@ for epoch in range(51):
         
         global_step += 1
     if epoch % 5 == 0:
-        torch.save(model,os.path.join(save_dir,"module%s"%epoch))
+        # 临时移除梯度钩子以便保存模型
+        model.remove_gradient_hooks()
+        torch.save(model, os.path.join(save_dir, "module%s" % epoch))
+        # 重新注册梯度钩子
+        model._register_gradient_hooks()
         
         
     # 计算epoch平均指标

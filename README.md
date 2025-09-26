@@ -1,4 +1,2 @@
 # CNN_model_test
-基于pytorch，尝试测试不同结构的cnn在数据集上会产生什么样的效果。
-不同网络结构在不同分支
-#测试的网络结构为VGG、ResNet两个分支
+event使用tensorboard查看
